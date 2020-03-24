@@ -33,7 +33,7 @@ class Article(models.Model):
     created_at = models.DateTimeField(default=jdatetime.datetime.now)  # 5
     category = models.ForeignKey('Category', on_delete=models.CASCADE)  # 6
     userprofile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-
+    promot = models.BooleanField(default=False)
 
 
 
