@@ -20,8 +20,7 @@ class UserProfile(models.Model):
     avator = models.FileField(upload_to='files/user_avator', validators=[validate_file_extenstion])  # 2
     description = models.CharField(max_length=512)
 
-    def __str__(self):
-        return self.user.username  # baraye user agar lastname first name ina too admin mizashtim mishod be unha ham vasl shod
+
 
 
 class Article(models.Model):
@@ -32,13 +31,9 @@ class Article(models.Model):
     category = models.ForeignKey('Category', on_delete=models.CASCADE)  # 6
     userprofile = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f"{self.title}"
+
 
 
 class Category(models.Model):
     title = models.CharField(max_length=128)
     cover = models.FileField(upload_to='files/category_cover', validators=[validate_file_extenstion])
-
-    def __str__(self):
-        return self.title
