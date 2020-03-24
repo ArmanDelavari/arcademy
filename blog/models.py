@@ -17,23 +17,29 @@ def validate_file_extenstion(value):  # 7
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # 1
-    avator = models.FileField(upload_to='files/user_avator', validators=[validate_file_extenstion])  # 2
+    avator = models.FileField(upload_to='images/user_avator/%Y/%m/%d', validators=[validate_file_extenstion])  # 2
     description = models.CharField(max_length=512)
+
+    def __str__(self):
+        return self.user.username
 
 
 
 
 class Article(models.Model):
     title = models.CharField(max_length=128)
-    cover = models.FileField(upload_to='files/article_cover', validators=[validate_file_extenstion])
+    cover = models.FileField(upload_to='images/article/%Y/%m/%d', validators=[validate_file_extenstion])
     content = RichTextField()  # 4
     created_at = models.DateTimeField(default=jdatetime.datetime.now)  # 5
     category = models.ForeignKey('Category', on_delete=models.CASCADE)  # 6
-    userprofile = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
+    userprofile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
 
 
 
 
 class Category(models.Model):
     title = models.CharField(max_length=128)
-    cover = models.FileField(upload_to='files/category_cover', validators=[validate_file_extenstion])
+    cover = models.FileField(upload_to='images/catalog/%Y/%m/%d', validators=[validate_file_extenstion])
+
+    def __str__(self):
+        return self.title

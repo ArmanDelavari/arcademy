@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from .models import *
 
 
 # Create your views here.
 
-class IndexPage(TemplateView):
-    template_name = 'blog/index.html'
+def indexpage(request):
+    all_articles = Article.objects.all().order_by('-created_at')[:9]
+    context = {'all_articles': all_articles}
+    return render(request, 'blog/index.html', context)
