@@ -127,8 +127,11 @@ USE_TZ = True
 
 
 # static files
-STATIC_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')   # 12
+STATIC_URL = '/static/'   # 13
+STATICFILES_DIRS = (   # 14
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # ckeditor
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
